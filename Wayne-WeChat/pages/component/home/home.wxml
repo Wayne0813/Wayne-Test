@@ -1,0 +1,90 @@
+<view class="index">
+  <!-- 头部 -->
+  <view class="nav-tab-wrp">
+    <navigator url="javascript:(0)" class="nav-tab-item" hover-class="navigator-hover">点餐</navigator>
+    <navigator url="navigate?title=navigate" class="nav-tab-item" hover-class="navigator-hover">评价</navigator>
+    <navigator url="navigate?title=navigate" class="nav-tab-item" hover-class="navigator-hover">商家</navigator>
+  </view>
+  <view class='cart'></view>
+
+  <!-- 购物车栏 -->
+  <view class="cart-tab-wrp">
+    <view class="cart-item-total cart-tab-item">
+      <view class="cart-item-icon-wrp" bindtap='showCart'>
+        <image class="cart-item-icon" src="../../resources/pic/orderBox.png" />
+        <text class="cart-item-total-num bc_red">{{cart.dish_count}}</text>
+      </view>
+      <text class="cart-item-total-price">￥{{cart.count_price}}</text>
+    </view>
+    <view class="cart-tab-item">
+      <navigator url="navigate?title=navigate" class="cart-tab-item-btn" hover-class="navigator-hover">选好了</navigator>
+    </view>
+  </view>
+
+ 
+
+  <view class="menu-wrp">
+    <!-- 左侧菜单 -->
+    <scroll-view scroll-y="true" class="left-side">
+      <block wx:for="{{menus}}" wx:key="id" wx:for-item="menu">
+        <view class="menu-item" data-id="{{menu.id}}" bindtap="selectMenu">
+          <view class="menu-item-wrp">
+            <view class="m-item-icon">
+              <image class="image" src="../../resources/pic/menu-01.png" />
+            </view>
+            <view>
+              <text class="m-item-title">{{menu.menu_name}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view class="menu-footer"></view>
+    </scroll-view>
+
+
+
+    <!-- 右侧菜品详情 -->
+    <scroll-view scroll-y="true" scroll-into-view="{{toView}}" class="right-side">
+      <view class="dish-header"></view>
+
+      <view id="1" class="dish-category-title">必选</view>
+      <block wx:for="{{dishes}}" wx:key="id" wx:for-item="dish">
+        <view class="dish-item">
+          <view class="dish-item-wrp">
+            <view class="dish-item-pic">
+              <image class="image" src="../../resources/pic/dish-1.jpg" />
+            </view>
+            <view class="dish-item-info" style="">
+              <view>
+                <text class="dish-item-name">{{dish.dish_name}}</text>
+              </view>
+              <view>
+                <text class="dish-item-sales">月销量 {{dish.dish_sales}}</text>
+              </view>
+              <view>
+                <text class="dish-item-money">¥ {{dish.dish_price}}</text>
+              </view>
+            </view>
+            <view class="dish-item-count">
+              <view class="dish-item-tab">
+                <!-- 添加点击事件 -->
+                <view hidden="{{dish.dish_num == 0}}" class="dish-item-count-minus" data-id="{{dish.id}}" bindtap="minusCount">
+                  <image class="image" src="../../resources/pic/countMinus.png" />
+                </view>
+              </view>
+              <view class="dish-item-count-text dish-item-tab">
+                <text hidden="{{dish.dish_num == 0}}">{{dish.dish_num}}</text>
+              </view>
+              <view class="dish-item-count-plus" data-id="{{dish.id}}" bindtap="addCount">
+                <image class="image" src="../../resources/pic/countSelAdd.png" />
+              </view>
+            </view>
+          </view>
+        </view>
+
+      </block>
+
+      <view class="dish-footer"></view>
+    </scroll-view>
+  </view>
+</view>
